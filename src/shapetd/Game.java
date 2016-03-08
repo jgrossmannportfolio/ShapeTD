@@ -37,7 +37,7 @@ public class Game extends JPanel {
 	public static final int UPDATE_PERIOD_MSEC = (int)(UPDATE_PERIOD_NSEC / 1000000);
 	public static final double UPDATE_PERIOD_SEC = (double) UPDATE_PERIOD_NSEC * Math.pow(10, -9);
 	
-	public static final int GOLD_START = 250;
+	public static final int GOLD_START = 230;
 	public static final int LIVES_START = 20;
 	
 	public static final boolean TEST_MODE = false;
@@ -61,8 +61,8 @@ public class Game extends JPanel {
 
 	static final Dimension SCREEN_DIMENSIONS = Toolkit.getDefaultToolkit()
 			.getScreenSize();
-	public static final int CANVAS_HEIGHT = 800; //SCREEN_DIMENSIONS.height;
-	public static final int CANVAS_WIDTH = 800;//CANVAS_HEIGHT;
+	public static final int CANVAS_HEIGHT = 700; //SCREEN_DIMENSIONS.height;
+	public static final int CANVAS_WIDTH = 700;//CANVAS_HEIGHT;
 	
 	public static final double BASE_INTEREST = 0.01;
 
@@ -257,75 +257,7 @@ public class Game extends JPanel {
 	};
 	
 	
-	public void gameLoop() {
-
-		//towers.add(new ArrowTower(390, 390));
-		//towers.add(new ArrowTower(458.5714, 390));
-		//Point2D.Double point = grid.findDestination(30, -20);
-		//Point p = grid.findDestinationIndex(point);
-		//enemies.add(new CircleEnemy(30, -10, point, p));
-		//repaint();
-		
-		
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		// MAIN GAME LOOP
-		
-		
-		long begintime, timetaken, timeleft;
-		while (state != GameState.GAMEOVER) {
-			begintime = System.nanoTime();
-			if (state == GameState.PLAY) {
-				gameUpdate();
-				repaint();
-			}else if(state == GameState.EXIT) {
-				repaint();
-				break;
-			}else if(state == GameState.RESTART) {
-				repaint();
-				break;
-			}
-			
-			// refresh display
-			timetaken = System.nanoTime() - begintime;
-			timeleft = Math
-					.max((UPDATE_PERIOD_NSEC - timetaken) / 1000000L, 10); // in
-																			// milliseconds
-			try {
-				Thread.sleep(timeleft);
-			} catch (InterruptedException ex) {
-				ex.printStackTrace();
-			}
-		}
-		
-		if(state == GameState.GAMEOVER) {
-			if(JOptionPane.showConfirmDialog(
-				    null,
-				    "GAME OVER\n"+
-				    "Would You Like To Play Again?",
-				    "Restart Game",
-				    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-				
-				state = GameState.RESTART;
-			}
-			else {
-				System.exit(0);
-			}
-		}
-		
-		if(state == GameState.RESTART) {
-			
-			gameInit();
-			gameStart();
-		}else {
-			System.exit(0);
-		}
-	}
-
+	
 	// detect collisions and provide responses
 	// update all game objects
 	public void gameUpdate() {

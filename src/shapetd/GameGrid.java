@@ -30,8 +30,8 @@ public class GameGrid {
 			//* (3 + (1.0 / 3.0)) * 0.01;
 	public static final double grid_square_spacing = grid_square_width * 0.32;
 			//screen_dimensions.height * 0.008; // CHECK
-																									// THIS
-																									// NUMBER!!!!
+						
+	//check that this is the actual height
 	public static final int num_grid_squares = (int) (Math
 			.round((Game.CANVAS_WIDTH - grid_square_spacing)
 					/ (grid_square_width + grid_square_spacing)));
